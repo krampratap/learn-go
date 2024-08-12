@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -37,5 +38,33 @@ func createBill() bill {
 func promptOptions(b *bill) {
 	reader := bufio.NewReader(os.Stdin)
 	opt, _ := getInput("Select option (a - add item, s - save bill, t - add tip):", reader)
-	fmt.Println(opt)
+	switch opt {
+	case "a":
+		name, _ := getInput("Get the item name", reader)
+		price, _ := getInput("Get the Price", reader) //Automatically the inputs are strings, so covert to floats
+
+		p, err := strconv.ParseFloat(price, 64) //64 is float 64
+		if err != nil {
+			fmt.Println("The price must be a number")
+			promptOptions(b)
+		}
+		b.addItem(name, p)
+		fmt.Println(name, price)
+		promptOptions(b)
+	case "t":
+		tip, _ := getInput("Get Tip", reader)
+		t, err := strconv.ParseFloat(tip, 64) //64 is float 64
+		if err != nil {
+			fmt.Println("The price must be a number")
+			promptOptions(b)
+		}
+		b.updateTip(t)
+		fmt.Println("Tip added", tip)
+		promptOptions(b)
+	case "s":
+		fmt.Println("The bill: ", b)
+	default:
+		fmt.Println("That was not a valid option")
+		promptOptions(b)
+	}
 }
