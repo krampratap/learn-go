@@ -10,4 +10,8 @@ func main() {
 	mybill.addItem("pie", 12.99)
 	mybill.addItem("cake", 13.99)
 	fmt.Println(mybill.format())
+	fmt.Println()
+	newBill := createBill()
+	promptOptions(&newBill)
+	fmt.Println(newBill)
 }
