@@ -7,5 +7,7 @@ func main() {
 	mybill := newBill("Dominos bill")
 	mybill.updateTip(10)
 	mybill.addItem("onion soup", 10.50)
+	mybill.addItem("pie", 12.99)
+	mybill.addItem("cake", 13.99)
 	fmt.Println(mybill.format())
 }
