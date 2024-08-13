@@ -1,0 +1,5 @@
+Bill breakdown 
+Tea:                      ...$10 
+Coffee:                   ...$20 
+tip:                      ...$5.00 
+total:                    ...$35.00

@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
+//It is better to pass pointers because everytime you go will create a new copy of the object to use
+//inside the method
 type bill struct {
 	name  string
 	items map[string]float64
@@ -43,5 +48,11 @@ func (b *bill) addItem(name string, price float64) {
 	b.items[name] = price
 }
 
-//It is better to pass pointers because everytime you go will create a new copy of the object to use
-//inside the method
+func (b *bill) save(){
+	data:=[]byte(b.format()) //we have to write bytes to the file
+	err:=os.WriteFile("bills/"+b.name+".txt",data,0644) //0644 is the permission
+	if err!=nil {
+		panic(err) //This is a method to stop the flow of the program and print out an error
+	}	
+	fmt.Println("Bill was saved to file")
+}
